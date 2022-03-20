@@ -9,6 +9,7 @@ import {
   HttpCode,
   Res,
   BadRequestException,
+  Header,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -35,6 +36,12 @@ export class UsersController {
     if (+id < 1) {
       throw new BadRequestException('id는 0보다 큰 값이어야 합니다.');
     }
+    return this.usersService.findOne(+id);
+  }
+
+  @Header('Custom', 'Test Header')
+  @Get('/head/:id')
+  findOnewithHeader(@Param('id') id: string) {
     return this.usersService.findOne(+id);
   }
 

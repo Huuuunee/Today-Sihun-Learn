@@ -10,6 +10,8 @@ import {
   Res,
   BadRequestException,
   Header,
+  Redirect,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -31,6 +33,7 @@ export class UsersController {
     return res.status(200).send(users);
   }
 
+  @Redirect('https://nestjs.com', 301)
   @Get(':id')
   findOne(@Param('id') id: string) {
     if (+id < 1) {
@@ -43,6 +46,13 @@ export class UsersController {
   @Get('/head/:id')
   findOnewithHeader(@Param('id') id: string) {
     return this.usersService.findOne(+id);
+  }
+  @Get('redirect/docs')
+  @Redirect('https://docs.nestjs.com', 302)
+  getDocs(@Query('version') version) {
+    if (version && version === '5') {
+      return { url: 'https://docs.nestjs.com/v5/' };
+    }
   }
 
   @HttpCode(202)

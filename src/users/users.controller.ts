@@ -55,6 +55,13 @@ export class UsersController {
     }
   }
 
+  @Delete(':userId/memo/:memoId')
+  deleteUserMemo(
+    @Param('userId') userId: string,
+    @Param('memoId') memoId: string,
+  ) {
+    return `userId: ${userId}, memoId: ${memoId}`;
+  }
   @HttpCode(202)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {

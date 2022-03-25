@@ -1,4 +1,9 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 
-@Controller('api-controller')
-export class ApiControllerController {}
+@Controller({ host: 'api.localhost' })
+export class ApiControllerController {
+  @Get()
+  index(): string {
+    return 'Hello, API';
+  }
+}

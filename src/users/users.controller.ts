@@ -22,8 +22,10 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  create(@Body() createUser: CreateUserDto) {
+    const { name, email } = createUser;
+
+    return `유저를 생성했습니다. 이름: ${name}, 이메일: ${email}`;
   }
 
   @Get()

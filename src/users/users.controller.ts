@@ -74,4 +74,9 @@ export class UsersController {
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
   }
+
+  @Post('create')
+  async createUser(@Body() dto: CreateUserDto): Promise<void> {
+    console.log(dto);
+  }
 }
